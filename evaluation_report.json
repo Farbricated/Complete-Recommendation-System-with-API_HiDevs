@@ -1,0 +1,155 @@
+{
+  "evaluation_metrics": {
+    "full_dataset": {
+      "precision@5": 0.42,
+      "recall@5": 0.8167,
+      "ndcg@5": 0.628,
+      "users_evaluated": 10,
+      "per_user": {
+        "ebc22b62-0d97-4a6a-b6fb-525e825aeddc": {
+          "precision": 0.8,
+          "recall": 1.0,
+          "ndcg": 1.0
+        },
+        "360744f8-42ee-4aff-aa1c-f823974e5894": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "ndcg": 0.43067655807339306
+        },
+        "a4bad3d2-aa00-4817-9e67-70dddbc12fb2": {
+          "precision": 0.2,
+          "recall": 0.3333333333333333,
+          "ndcg": 0.2960819109658652
+        },
+        "cd680920-d3f4-430c-8de9-9f7e7a881ae9": {
+          "precision": 0.4,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.4367467095119258
+        },
+        "d6355188-881f-450d-a654-f851f7feb293": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "ndcg": 0.6934264036172708
+        },
+        "21e89e37-01ed-449c-a68c-c48e22888e50": {
+          "precision": 0.6,
+          "recall": 1.0,
+          "ndcg": 0.7328286204777911
+        },
+        "4165d0e7-2c8b-421a-a8ae-e2a56ca9c99e": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "ndcg": 1.0
+        },
+        "cacbe320-7712-43e2-89e7-8fba2938d7c1": {
+          "precision": 0.2,
+          "recall": 0.5,
+          "ndcg": 0.3065735963827292
+        },
+        "12d460c2-79ad-42f9-89b6-8338dc1ed773": {
+          "precision": 0.4,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.6508205185601091
+        },
+        "fa0db379-bdaf-4f50-9c32-bec750d95efd": {
+          "precision": 0.6,
+          "recall": 1.0,
+          "ndcg": 0.7328286204777911
+        }
+      }
+    },
+    "leave_one_out": {
+      "precision@5": 0.0,
+      "recall@5": 0.0,
+      "ndcg@5": 0.0,
+      "users_evaluated": 11,
+      "per_user": {
+        "ebc22b62-0d97-4a6a-b6fb-525e825aeddc": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "ndcg": 0.0
+        },
+        "360744f8-42ee-4aff-aa1c-f823974e5894": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "ndcg": 0.0
+        },
+        "a4bad3d2-aa00-4817-9e67-70dddbc12fb2": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "ndcg": 0.0
+        },
+        "cd680920-d3f4-430c-8de9-9f7e7a881ae9": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "ndcg": 0.0
+        },
+        "d6355188-881f-450d-a654-f851f7feb293": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "ndcg": 0.0
+        },
+        "21e89e37-01ed-449c-a68c-c48e22888e50": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "ndcg": 0.0
+        },
+        "4165d0e7-2c8b-421a-a8ae-e2a56ca9c99e": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "ndcg": 0.0
+        },
+        "cacbe320-7712-43e2-89e7-8fba2938d7c1": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "ndcg": 0.0
+        },
+        "6aad7577-5a32-4ab5-8783-42facfd78b99": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "ndcg": 0.0
+        },
+        "12d460c2-79ad-42f9-89b6-8338dc1ed773": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "ndcg": 0.0
+        },
+        "fa0db379-bdaf-4f50-9c32-bec750d95efd": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "ndcg": 0.0
+        }
+      }
+    }
+  },
+  "latency_benchmark": {
+    "single_request_avg_ms": 0.31,
+    "meets_200ms_sla": true
+  },
+  "load_test": {
+    "concurrent_users": 10,
+    "requests_per_user": 5,
+    "total_requests": 50,
+    "successful_requests": 50,
+    "errors": 0,
+    "total_time_sec": 0.03,
+    "throughput_rps": 1795.7,
+    "latency_ms": {
+      "mean": 1.86,
+      "median": 0.0,
+      "p95": 20.49,
+      "min": 0.0,
+      "max": 23.45
+    },
+    "meets_200ms_sla": true
+  },
+  "system_stats": {
+    "total_users": 13,
+    "total_content": 22,
+    "total_interactions": 52,
+    "matrix_users": 11,
+    "cache_size": 20,
+    "cache_maxsize": 500,
+    "matrix_age_sec": 0.1
+  }
+}

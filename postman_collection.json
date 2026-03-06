@@ -1,0 +1,181 @@
+{
+  "info": {
+    "name": "Recommendation System API",
+    "description": "Complete test collection for Day 30 Capstone Recommendation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "base_url", "value": "http://localhost:5000"},
+    {"key": "api_key",  "value": "dev-key-123"},
+    {"key": "user_id",  "value": "REPLACE_WITH_REAL_USER_ID"},
+    {"key": "content_id", "value": "c01"}
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/health",
+        "description": "Check system health and stats (no auth required)"
+      },
+      "event": [{
+        "listen": "test",
+        "script": {"exec": [
+          "pm.test('Status 200', () => pm.response.to.have.status(200));",
+          "pm.test('Status is healthy', () => pm.expect(pm.response.json().status).to.eql('healthy'));"
+        ]}
+      }]
+    },
+    {
+      "name": "Get Recommendations",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/recommend",
+        "header": [
+          {"key": "X-API-Key", "value": "{{api_key}}"},
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"user_id\": \"{{user_id}}\", \"n\": 10, \"diversity\": true}"
+        }
+      },
+      "event": [{
+        "listen": "test",
+        "script": {"exec": [
+          "pm.test('Status 200', () => pm.response.to.have.status(200));",
+          "pm.test('Has recommendations', () => pm.expect(pm.response.json()).to.have.property('recommendations'));",
+          "pm.test('Has X-Request-ID header', () => pm.expect(pm.response.headers.get('X-Request-ID')).to.not.be.null);"
+        ]}
+      }]
+    },
+    {
+      "name": "Get Recommendations - Cold Start",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/recommend",
+        "header": [
+          {"key": "X-API-Key", "value": "{{api_key}}"},
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"user_id\": \"REPLACE_WITH_COLD_USER_ID\", \"n\": 5}"
+        }
+      }
+    },
+    {
+      "name": "Record Feedback - View",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/feedback",
+        "header": [
+          {"key": "X-API-Key", "value": "{{api_key}}"},
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"user_id\": \"{{user_id}}\", \"content_id\": \"{{content_id}}\", \"event_type\": \"view\"}"
+        }
+      }
+    },
+    {
+      "name": "Record Feedback - Rate",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/feedback",
+        "header": [
+          {"key": "X-API-Key", "value": "{{api_key}}"},
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"user_id\": \"{{user_id}}\", \"content_id\": \"{{content_id}}\", \"event_type\": \"rate\", \"rating\": 4.5}"
+        }
+      }
+    },
+    {
+      "name": "Record Feedback - Complete",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/feedback",
+        "header": [
+          {"key": "X-API-Key", "value": "{{api_key}}"},
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"user_id\": \"{{user_id}}\", \"content_id\": \"{{content_id}}\", \"event_type\": \"complete\", \"duration_sec\": 3600}"
+        }
+      }
+    },
+    {
+      "name": "Get Metrics",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/metrics",
+        "header": [{"key": "X-API-Key", "value": "{{api_key}}"}]
+      }
+    },
+    {
+      "name": "Get Similar Items",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/similar/{{content_id}}?n=5",
+        "header": [{"key": "X-API-Key", "value": "{{api_key}}"}]
+      }
+    },
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/users",
+        "header": [
+          {"key": "X-API-Key", "value": "{{api_key}}"},
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\": \"new_user_example\", \"email\": \"newuser@example.com\", \"skill_level\": \"beginner\", \"preferences\": [\"python\", \"data-science\"]}"
+        }
+      }
+    },
+    {
+      "name": "List Content",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/content?category=python",
+        "header": [{"key": "X-API-Key", "value": "{{api_key}}"}]
+      }
+    },
+    {
+      "name": "Error: No API Key",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/recommend",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"user_id\": \"test\"}"}
+      },
+      "event": [{
+        "listen": "test",
+        "script": {"exec": ["pm.test('Expect 401', () => pm.response.to.have.status(401));"]}
+      }]
+    },
+    {
+      "name": "Error: Missing user_id",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/recommend",
+        "header": [
+          {"key": "X-API-Key", "value": "{{api_key}}"},
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {"mode": "raw", "raw": "{\"n\": 5}"}
+      },
+      "event": [{
+        "listen": "test",
+        "script": {"exec": ["pm.test('Expect 422', () => pm.response.to.have.status(422));"]}
+      }]
+    }
+  ]
+}
